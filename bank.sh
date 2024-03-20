@@ -28,7 +28,7 @@ function modify_sold() {
     read -p "Enter client PK: " client_pk
     read -p "Enter new sold value: " new_sold
     if [ grep "^$client_pk,"  db.csv ]; then
-        sed -i "s/^$client_pk,[^,]*/$client_pk,$new_sold/" db.csv
+        sed -i "s/^\($client_pk,[^,]*,\)[^,]*/\1$new_sold/" db.csv
         if [ $? -eq 0 ]; then
             echo "Sold for client with PK '$client_pk' modified to $new_sold"
         fi

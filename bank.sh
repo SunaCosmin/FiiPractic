@@ -27,7 +27,7 @@ function modify_sold() {
     echo "Modify sold"
     read -p "Enter client PK: " client_pk
     read -p "Enter new sold value: " new_sold
-    if [ grep "^$client_pk,"  db.csv ]; then
+    if [ $(grep "^$client_pk,"  db.csv) ]; then
         sed -i "s/^\($client_pk,[^,]*,\)[^,]*/\1$new_sold/" db.csv
         if [ $? -eq 0 ]; then
             echo "Sold for client with PK '$client_pk' modified to $new_sold"
@@ -40,7 +40,7 @@ function modify_sold() {
 function delete_client() {
     echo "Delete client"
     read -p "Enter client PK: " client_pk
-    if grep [ "^$client_pk," db.csv ]; then
+    if [ $(grep  "^$client_pk," db.csv) ] ; then
         sed -i "/^$client_pk,/d" db.csv
         if [ $? -eq 0 ]; then
             echo "Client with PK '$client_pk' deleted from database"
